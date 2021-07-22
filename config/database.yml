@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+  pool: 5 %>
+
+development:
+  <<: *default
+  database: bookstore-rails_development
+
+test:
+  <<: *default
+  database: bookstore-rails_test
+
+production:
+  <<: *default
+  database: bookstore-rails_production
+
