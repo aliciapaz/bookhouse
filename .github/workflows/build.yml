@@ -1,0 +1,30 @@
+---
+# Run all the jobs needed to automatically build and test the app
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - development
+      - main
+  pull_request:
+    branches:
+      - development
+      - main
+
+jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Prepare Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Rubocop report
+        env:
+          FORCE_COLOR: 1
+        run: bundle exec rubocop --color --fail-fast
