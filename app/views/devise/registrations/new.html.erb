@@ -2,6 +2,11 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+  <h3>Step 1: Personal Info</h3>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -21,9 +26,41 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+    <h3>Step 2: Choose an account type</h3>
+
+
+    <button id="buyer-btn">I want to buy books</button>
+    <button id="seller-btn">I want to sell books</button>
+
+    <div id="seller-input" class="field invisible">
+    <%= f.label :user_info %><br />
+    <%= f.text_field :user_info, autofocus: true, autocomplete: "Enter your phone" %>
+  </div>
+
+    <div id="buyer-input" class="field invisible">
+    <%= f.label :user_info %><br />
+    <%= f.text_field :user_info, autofocus: true, autocomplete: "Enter your address" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
+
+  <script>
+
+  let sellerBtn = document.getElementById("seller-btn")
+  let buyerBtn = document.getElementById("buyer-btn")
+  let sellerInput = document.getElementById("seller-input")
+  let buyerInput = document.getElementById("buyer-input")
+
+  // sellerBtn.onclick = (()=> sellerInput.classList.toggle("visible") )
+  // buyerBtn.onclick = (()=> buyerInput.classList.toggle("visible") )
+  sellerBtn.onclick = () => console.log("sellerBtn")
+  buyerBtn.onclick = ()=> console.log("buyerBtn")
+
+
+</script>
 <% end %>
+
 
 <%= render "devise/shared/links" %>
