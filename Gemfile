@@ -28,6 +28,9 @@ gem "bootsnap", ">= 1.4.4", require: false
 # Use devise for authentication
 gem "devise", "~> 4.8"
 
+# Use pundit for authorization
+gem 'pundit', '~> 2.1'
+
 # Need to seed faker data for production as well
 gem "faker"
 
