@@ -13,8 +13,8 @@ class User < ApplicationRecord
 
   private
     def phone_or_address
-      if phone.blank? && address.blank?
-        errors.add(:user_info, "is required. You need to select an account type and provide your contact info")
-      end
+      return unless phone.blank? && address.blank?
+
+      errors.add(:user_info, "is required. You need to select an account type and provide your contact info")
     end
 end
