@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -9,12 +7,21 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2, maximum: 25 }
   validate :phone_or_address
 
-  store_accessor :user_info, :phone, :address
+  store_accessor :user_info, :phone, :address, :balance
+
+  after_create :update_initial_balance
 
   private
     def phone_or_address
       return unless phone.blank? && address.blank?
 
       errors.add(:user_info, "is required. You need to select an account type and provide your contact info")
+    end
+
+    def update_initial_balance
+      return unless buyer?
+
+      user_info["balance"] = 50
+      save!
     end
 end
