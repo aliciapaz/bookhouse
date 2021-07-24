@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :books, class_name: "Book", foreign_key: "seller_id", dependent: :destroy, inverse_of: :sellers
+
   enum role: { admin: 0, buyer: 1, seller: 2 }
 
   validates :name, presence: true, length: { minimum: 2, maximum: 25 }
