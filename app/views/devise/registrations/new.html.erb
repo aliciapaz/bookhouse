@@ -36,7 +36,7 @@
   
       <br>
   
-    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, {id:'role-select', class:'invisible'}) %>
+    <%= f.select(:role, options_for_select(%w[buyer seller], selected: 'buyer' || nil), {}, {id:'role-select', class:'invisible'}) %>
       <div id="user-info"></div>
   
       <br>
@@ -68,7 +68,7 @@
     const createContactForm = (contactInfo) => {
       const input = document.createElement('div')
       if (inputContainer.innerHTML !== '') { inputContainer.innerHTML = ''}
-      let userContactInfo = `<label for="user_user_info">${contactInfo}</label><br /><input autofocus="autofocus" autocomplete="Enter your ${contactInfo}" type="text" value="" name="user[user_info]" id="user_user_info">`
+      let userContactInfo = `<label for="user_user_info">${contactInfo}</label><br /><input autofocus="autofocus" autocomplete="Enter your ${contactInfo}" type="text" value="" name="user[user_info][${contactInfo.toLowerCase()}]" id="user_user_info">`
       input.innerHTML = userContactInfo
       inputContainer.appendChild(input)
     }
