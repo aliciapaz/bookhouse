@@ -1,6 +1,11 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.order(created_at: :desc).page(params[:page]).per(6)
+    if params[:search_by_title].present?
+      @book_search = Book.search_by_title(params[:search_by_title])
+      @books = @book_search.order(created_at: :desc).page(params[:page]).per(6)
+    else
+      @books = Book.order(created_at: :desc).page(params[:page]).per(6)
+    end
   end
 
   def show
@@ -49,7 +54,7 @@ class BooksController < ApplicationController
     redirect_to @user, notice: "Book was successfully deleted"
   end
 
-  # See books of a given seller
+  # Show books of a given seller
   def seller
     @seller = User.find(params[:id])
     @books = Book.where(seller_id: params[:id])
@@ -58,6 +63,6 @@ class BooksController < ApplicationController
 
   private
     def book_params
-      params.require(:book).permit(:title, :description, :author, :price, :image)
+      params.require(:book).permit(:title, :description, :author, :price, :image, :search_by_title)
     end
 end

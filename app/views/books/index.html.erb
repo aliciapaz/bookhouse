@@ -1,9 +1,18 @@
 <div class="container">
+  <div class ="row">
+    <div class="col-12 d-flex align-items-center">
+      <%= form_for( books_path, method: :get) do |f| %>
+        <%= text_field_tag (:search_by_title), params[:search_by_title] %>
+        <%= submit_tag "Search", class:"btn btn-primary my-1" %>
+      <% end %>
+      <%= button_to "Browse all books", books_path, method: :get, class: "btn btn-info m-1" %>
+    </div>
+  </div>
   <div class="row">
-     <% @books.each do |book| %>
-     <div class="d-flex flex-column col-4">
-     <%=  book_card(book)  %>
-     </div>
+    <% @books.each do |book| %>
+    <div class="d-flex flex-column col-4">
+    <%=  book_card(book)  %>
+    </div>
     <% end %>
   </div>
 
