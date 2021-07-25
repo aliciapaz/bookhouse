@@ -1,0 +1,26 @@
+<h1 class="text-center">Publish a book for sale</h1>
+
+<div class="container">
+  
+    <%= form_with model: @book do |f|%>
+  <div class="row g-3 justify-content-md-center">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+  
+      <%= f.label :author %>
+      <%= f.text_field :author, class: "form-control" %>
+  
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control" %>
+  
+      <%= f.label :price %>
+      <%= f.text_field :price, class: "form-control" %>
+  
+      <%= f.label :image %>
+      <%= f.file_field :image, class: "form-control" %>
+  
+      <%= f.submit "Publish book for sale", class: "btn btn-primary" %>
+  </div>
+  
+    <% end %>
+</div>
