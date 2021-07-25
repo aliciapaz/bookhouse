@@ -1,1 +1,13 @@
-<h1 class="text-center">Welcome to the Book House!</h1>
+<div class="container">
+  <h1 class="text-center my-5">Welcome to the Book House!</h1>
+  
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <% if current_user %>
+        <% if current_user.buyer? %>
+           <%= link_to "Browse Books", books_url, class: "btn btn-info my-1"%>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
