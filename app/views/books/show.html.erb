@@ -1,0 +1,18 @@
+
+<div class="container">
+  <div class = "row d-flex flex.column justify-content-center">
+    <div class= "col-10 d-flex">
+      <% if @book.image.attached? %>
+        <%= image_tag url_for(@book.image), { height: "400"} %>
+      <% else %>
+        <%= image_tag "default_cover.png", {height: "400"} %>
+      <% end %>
+      <div class="d-flex flex-column px-4">
+        <strong>Title: </strong><%= @book.title%>
+        <strong>Author: </strong><%= @book.author%>
+        <strong>Description: </strong><%= @book.description%>
+        <strong>Price: </strong>$<%= @book.price%>
+      </div>
+    </div>
+  </div>
+</div>
