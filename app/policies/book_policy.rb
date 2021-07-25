@@ -7,6 +7,10 @@ class BookPolicy
   end
 
   # CRUD actions
+  def new?
+    user.seller?
+  end
+
   def create?
     user.seller?
   end
