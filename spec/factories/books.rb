@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :book do
-    title { "MyString" }
-    description { "MyText" }
-    author { "MyString" }
+    title { Faker::Book.title }
+    description { Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false) }
+    author { Faker::Book.author }
     price { "9.99" }
-    seller { nil }
+    seller_id { nil }
   end
 end
