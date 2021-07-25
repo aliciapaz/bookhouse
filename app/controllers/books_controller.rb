@@ -49,6 +49,13 @@ class BooksController < ApplicationController
     redirect_to @user, notice: "Book was successfully deleted"
   end
 
+  # See books of a given seller
+  def seller
+    @seller = User.find(params[:id])
+    @books = Book.where(seller_id: params[:id])
+    render "user_books"
+  end
+
   private
     def book_params
       params.require(:book).permit(:title, :description, :author, :price, :image)
