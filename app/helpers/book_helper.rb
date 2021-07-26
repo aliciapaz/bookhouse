@@ -8,4 +8,10 @@ module BookHelper
     concat link_to book.title, book
     tag.p("$#{book.price}")
   end
+
+  def add_to_cart_button(book)
+    return unless current_user&.buyer?
+
+    concat link_to "Add to Cart", add_to_cart_path(book)
+  end
 end

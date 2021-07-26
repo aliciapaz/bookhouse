@@ -87,3 +87,6 @@ Style/NumericLiterals:
     - "db/**/*"
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
+GlobalVars:
+  AllowedVariables:
+    - $redis
