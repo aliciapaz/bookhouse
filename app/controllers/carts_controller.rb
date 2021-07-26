@@ -4,6 +4,7 @@ class CartsController < ApplicationController
   def show
     cart_ids = $redis.smembers current_user_cart
     @cart_books = Book.find(cart_ids)
+    authorize :cart, :show?
   end
 
   def add

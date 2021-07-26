@@ -2,7 +2,17 @@
   <div clas="row">
     <div class="co-6">
       <h1>My cart</h1>
-      <p></p>
+
+      <p>You've selected <span><%=current_user.cart_count%></span> books</p>
     </div>
+
+    <% @cart_books.each do |book| %>
+    <div class="d-flex align-items-center justify-content-between">
+      <%= link_to book.title, book%>
+      <%= book.price %>
+       <%=button_to 'Remove From Cart', remove_from_cart_path(book), { method: :put,
+                                         class: 'btn btn-warning' } %>
+    </div>
+    <% end %>
   </div>
 </div>
