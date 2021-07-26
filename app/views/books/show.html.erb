@@ -14,7 +14,9 @@
         <strong>Price: </strong>$<%= @book.price%>
         <strong>Seller name: </strong><%= link_to @seller.name, user_books_url(@seller.id)%>
         <% if signed_in? && current_user.buyer? %>
-        <%= link_to "#{@cart_action} Cart", "javascript:;", class: "btn btn-primary", id: "cart-action-btn", data: {target: @cart_action, addUrl: add_to_cart_path(@book), removeUrl: remove_from_cart_path(@book)}%>
+          <%=link_to "", id: "cart-action-btn", class: "btn btn-primary", data: {target: @cart_action, addUrl: add_to_cart_path(@book), removeUrl: remove_from_cart_path(@book)} do%>
+            <span><%=@cart_action%></span> Cart
+          <%end%>
         <% end %>
       </div>
     </div>
@@ -22,19 +24,24 @@
 </div>
 
 <script> 
-  const cartActionBtn = document.getElementById('cart-action-btn')
-  const cartCount = document.getElementById('cart-count')
-  cartActionBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log(cartActionBtn.dataset.target)
-    let url, newTarget;
-    if (cartActionBtn.dataset.target == "Add to" ) {
-      url = cartActionBtn.dataset.addurl
-      newTarget = "Remove from"
-    } else {
-      url = cartActionBtn.dataset.removeurl
-      newTarget = "Add to"
-    }
-    
+  $(window).on('load', () => {
+    $('#cart-action-btn').click((e) => {
+      e.preventDefault();
+      const cartActionBtn = $('#cart-action-btn')
+      let new_target, url;
+      if (cartActionBtn.data('target') === 'Add to') {
+        url = cartActionBtn.data('addurl');
+        new_target = "Remove from";
+      } else {
+        url = cartActionBtn.data('removeurl')
+        new_target = "Add to";
+      }
+      return $.ajax({url, type: 'put', success(data) {
+        console.log(data)
+        $('#cart-count').html(`My Cart: ${data}`);
+        cartActionBtn.find('span').html(new_target)
+        cartActionBtn.data('target', new_target)
+      }})
+    })
   })
 </script>

@@ -7,7 +7,7 @@
 <%= link_to "Sign Up", "/users/sign_up", class: 'nav-link' %>
  <%= link_to "Log in", "/users/sign_in", class: 'nav-link' %>
  <%else%>
-  <%= link_to "My Cart #{current_user.cart_count}", cart_path(current_user.id), {id: "cart-count", class: 'nav-link'} if current_user.buyer? %>
+  <%= link_to "My Cart: #{current_user.cart_count}", cart_path(current_user.id), {id: "cart-count", class: 'nav-link'} if current_user.buyer? %>
   <%= link_to "Sell a Book", new_book_url, class: 'nav-link' if current_user.seller? %>
   <%= link_to "Log out", "/users/sign_out", method: "delete", class: "nav-link" %>
  <%end%>
