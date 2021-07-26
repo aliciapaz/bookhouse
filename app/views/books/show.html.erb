@@ -14,27 +14,27 @@
         <strong>Price: </strong>$<%= @book.price%>
         <strong>Seller name: </strong><%= link_to @seller.name, user_books_url(@seller.id)%>
         <% if signed_in? && current_user.buyer? %>
-            <%=button_to 'Add to Cart', add_to_cart_path(@book), { method: :put,
-                                       class: 'btn btn-primary' } %>
+        <%= link_to "#{@cart_action} Cart", "javascript:;", class: "btn btn-primary", id: "cart-action-btn", data: {target: @cart_action, addUrl: add_to_cart_path(@book), removeUrl: remove_from_cart_path(@book)}%>
         <% end %>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  // const cartActionBtn = document.getElementById("cart-action-btn")
-  // cartActionBtn.addEventListener('click', (e) => {
-  //   let newTarget, url;
-  //   e.preventDefault();
-  //   if (this.data("target") === "Add to") {
-  //     url = this.data("addUrl")
-  //     newTarget = "Remove from"
-  //   } else {
-  //     url = this.data("removeUrl")
-  //     newTarget = "Add to";
-  //   }
-  //   this.find('span').html(newTarget)
-  //   this.data('target', newTarget)
-  // })
+<script> 
+  const cartActionBtn = document.getElementById('cart-action-btn')
+  const cartCount = document.getElementById('cart-count')
+  cartActionBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log(cartActionBtn.dataset.target)
+    let url, newTarget;
+    if (cartActionBtn.dataset.target == "Add to" ) {
+      url = cartActionBtn.dataset.addurl
+      newTarget = "Remove from"
+    } else {
+      url = cartActionBtn.dataset.removeurl
+      newTarget = "Add to"
+    }
+    
+  })
 </script>
