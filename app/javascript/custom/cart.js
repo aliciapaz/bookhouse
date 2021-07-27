@@ -1,3 +1,4 @@
+// Add to and remove from cart on book show page
 $(window).on("turbolinks:load", () => {
   $('#cart-action-btn').on('click', (e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ $(window).on("turbolinks:load", () => {
       cartActionBtn.data('target', new_target)
     }})
   })
-
+// Remove from cart on cart show page
   $('#my-cart .remove').on('click', (e) => {
     e.preventDefault();
     let removeBtn, url;
@@ -29,12 +30,13 @@ $(window).on("turbolinks:load", () => {
       $( e.target ).closest('.cart-book').slideUp()
     }})
   });
-
+// Confirm purchase and update content
   $('.confirm').on('click', (e) => {
     e.preventDefault();
     let url = $('.confirm').data('targeturl')
-    $.ajax({url, type: 'put', success(data) {
-      $('#user-balance').html(`My Balance: $${data}`)
+    $.ajax({url, type: 'put', datatype: 'json', success(data) {
+      $('#user-balance').html(`My Balance: $${data.balance}`)
+      $('#cart-count').html(`My Cart: ${data.cart}`)
     }})
   })
 })
