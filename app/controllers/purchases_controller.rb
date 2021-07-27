@@ -10,8 +10,7 @@ class PurchasesController < ApplicationController
 
   def confirm_purchase
     current_user.purchase_cart_books!
-    render json: current_user.balance, status: :ok
-    redirect_to "home/confirmation"
+    render json: { balance: current_user.balance, cart: current_user.cart_count }, status: :ok
     authorize :purchase, :confirm_purchase?
   end
 
@@ -25,6 +24,7 @@ class PurchasesController < ApplicationController
     def check_balance
       return unless current_user.cart_total_price > current_user.balance
 
-      redirect_to cart_path(current_user.id), alert: "Oops, looks like your balance is not enough to pay. Please transfer money to your balance before processing your transaction."
+      redirect_to cart_path(current_user.id),
+                  alert: "Oops. Please transfer money to your balance before processing your transaction."
     end
 end
