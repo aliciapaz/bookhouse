@@ -51,9 +51,8 @@ RSpec.describe User, type: :model do
     expect(buyer.balance).to eq(0)
   end
 
-  it "can not have a negative balance" do
-    buyer = build(:buyer)
-    buyer.balance = -5
-    expect(buyer).not_to be_valid
+  it "gives a balance of $0 to an admin user after sign-up" do
+    admin = create(:user, role: "admin")
+    expect(admin.balance).to eq(0)
   end
 end

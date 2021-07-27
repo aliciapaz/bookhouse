@@ -75,6 +75,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Enable and config logging in stdout
-  config.logger = Logger.new($stdout)
-  config.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
+  # config.logger = Logger.new($stdout)
+  # config.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
 end

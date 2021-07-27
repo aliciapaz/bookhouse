@@ -29,6 +29,14 @@ $(window).on("turbolinks:load", () => {
       $( e.target ).closest('.cart-book').slideUp()
     }})
   });
+
+  $('.confirm').on('click', (e) => {
+    e.preventDefault();
+    let url = $('.confirm').data('targeturl')
+    $.ajax({url, type: 'put', success(data) {
+      $('#user-balance').html(`My Balance: $${data}`)
+    }})
+  })
 })
 
 const set_noun = (data) => {
