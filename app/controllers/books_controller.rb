@@ -12,7 +12,6 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @seller = User.find(@book.seller_id)
     @cart_action = @book.cart_action current_user.try :id
-    logger.info @cart_action
   end
 
   def new

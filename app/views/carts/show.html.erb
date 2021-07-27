@@ -1,4 +1,4 @@
-<div class="container">
+<div id="my-cart" class="container">
   <div clas="row">
     <div class="co-6">
       <h1>My cart</h1>
@@ -7,12 +7,31 @@
     </div>
 
     <% @cart_books.each do |book| %>
-    <div class="d-flex align-items-center justify-content-between">
-      <%= link_to book.title, book%>
-      <%= book.price %>
-       <%=button_to 'Remove From Cart', remove_from_cart_path(book), { method: :put,
-                                         class: 'btn btn-warning' } %>
+    <div class="row my-1 cart-book">
+      <div class="col-6"><%= link_to book.title, book%></div>
+      <div class="col-2">$ <%= book.price %></div>
+      <div class="col-4">
+          <%= link_to "", class: "btn btn-warning remove", data: {targetUrl: remove_from_cart_path(book)} do %>
+            Remove from Cart
+          <% end %>
+      </div>
     </div>
     <% end %>
   </div>
 </div>
+
+<script>
+  $(window).on("turbolinks:load", () => {
+    $('#my-cart .remove').click((e) => {
+    e.preventDefault();
+    let removeBtn, url;
+    removeBtn = $('#my-cart .remove').closest('a')
+    url = removeBtn.data('targeturl')
+    $.ajax({url, type: 'put', success(data) {
+      $('#cart-count').html(`My Cart: ${data}`);
+      $('span').html(data)
+      $( e.target ).closest('.cart-book').slideUp()
+    }})
+  });
+  })
+</script>
