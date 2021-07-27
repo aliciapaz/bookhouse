@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2, maximum: 25 }
   validates :role, presence: true
   validate :phone_or_address
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
   store_accessor :user_info, :phone, :address, :balance
 

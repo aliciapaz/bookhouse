@@ -50,4 +50,10 @@ RSpec.describe User, type: :model do
     buyer = create(:seller)
     expect(buyer.balance).to eq(0)
   end
+
+  it "can not have a negative balance" do
+    buyer = build(:buyer)
+    buyer.balance = -5
+    expect(buyer).not_to be_valid
+  end
 end
