@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   after_create :update_initial_balance
 
-  store_accessor :user_info, :phone, :address, :balance
+  jsonb_accessor :user_info, phone: :string, address: :string, balance: :decimal
 
   enum role: { admin: 0, buyer: 1, seller: 2 }
 
