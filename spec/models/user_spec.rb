@@ -36,6 +36,11 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
+  it "is valid without a phone or address if admin" do
+    user = build(:user, role: "admin")
+    expect(user).to be_valid
+  end
+
   it "gives $50 to a buyer after a successful sign-up" do
     buyer = create(:buyer)
     expect(buyer.balance).to eq(50)

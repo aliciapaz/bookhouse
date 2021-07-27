@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   private
     def phone_or_address
-      return unless phone.blank? && address.blank? || role == "admin"
+      return unless phone.blank? && address.blank? && role != "admin"
 
       errors.add(:user_info, "is required. You need to select an account type and provide your contact info")
     end
