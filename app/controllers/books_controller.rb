@@ -58,7 +58,7 @@ class BooksController < ApplicationController
   # Show books of a given seller
   def seller
     @seller = User.find(params[:id])
-    @books = Book.where(seller_id: params[:id])
+    @books = Book.available.where(seller_id: params[:id]).order(created_at: :desc).page(params[:page]).per(6)
     render "user_books"
   end
 
