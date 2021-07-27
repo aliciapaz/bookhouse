@@ -1,0 +1,14 @@
+<div class="container">
+
+<h1>Check-out</h1>
+<p><em>Congratulations! You are about to get smarter </em>😁</p>
+
+<div>Total amount to pay: $ <span><%= @cart_total %></span></div>
+
+<%= link_to "Go back to cart", cart_path(current_user.id), class:"btn btn-info" %>
+<%= link_to "Keep browsing books", books_path, class:"btn btn-info" %>
+<%= link_to "", class: "btn btn-primary confirm", data: {targetUrl: confirm_purchase_path } do %>
+    Confirm purchase
+<% end%>
+
+</div>
