@@ -1,9 +1,10 @@
-@import "bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
 
 body {
+  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  color: #000;
   margin: 0 auto;
-  color: black;
-  word-wrap: break-word;
   overflow-x: hidden;
-  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  word-wrap: break-word;
 }
+
