@@ -9,6 +9,7 @@ import * as ActiveStorage from '@rails/activestorage'
 import 'channels'
 import 'bootstrap'
 import 'jquery'
+import 'custom/cart'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

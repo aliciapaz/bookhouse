@@ -19,19 +19,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  $(window).on("turbolinks:load", () => {
-    $('#my-cart .remove').click((e) => {
-    e.preventDefault();
-    let removeBtn, url;
-    removeBtn = $('#my-cart .remove').closest('a')
-    url = removeBtn.data('targeturl')
-    $.ajax({url, type: 'put', success(data) {
-      $('#cart-count').html(`My Cart: ${data}`);
-      $('span').html(data)
-      $( e.target ).closest('.cart-book').slideUp()
-    }})
-  });
-  })
-</script>
