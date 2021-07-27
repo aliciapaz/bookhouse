@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
   def index
     if params[:search_by_title].present?
-      @book_search = Book.search_by_title(params[:search_by_title])
+      @book_search = Book.available.search_by_title(params[:search_by_title])
       @books = @book_search.order(created_at: :desc).page(params[:page]).per(6)
     else
-      @books = Book.order(created_at: :desc).page(params[:page]).per(6)
+      @books = Book.available.order(created_at: :desc).page(params[:page]).per(6)
     end
   end
 
