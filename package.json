@@ -2,6 +2,7 @@
   "name": "bookstore-rails",
   "private": true,
   "dependencies": {
+    "@babel/core@": "7.11.0",
     "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -16,6 +17,12 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.14",
+    "eslint": "^7.31.0",
+    "eslint-config-standard": "^16.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1 || ^5.0.0",
     "webpack-dev-server": "^3.11.2"
   }
 }

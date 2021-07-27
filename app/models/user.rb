@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   after_create :update_initial_balance
 
+  def cart_count
+    $redis.scard "cart#{id}"
+  end
+
   private
     def phone_or_address
       return unless phone.blank? && address.blank? || role == "admin"

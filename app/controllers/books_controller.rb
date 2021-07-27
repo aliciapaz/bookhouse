@@ -11,6 +11,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @seller = User.find(@book.seller_id)
+    @cart_action = @book.cart_action current_user.try :id
   end
 
   def new

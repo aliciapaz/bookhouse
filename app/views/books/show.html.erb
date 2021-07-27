@@ -1,19 +1,46 @@
 
 <div class="container">
-  <div class = "row d-flex flex.column justify-content-center">
-    <div class= "col-10 d-flex">
+  <div class = "row d-flex flex-column">
+    <div class= "col d-flex">
       <% if @book.image.attached? %>
         <%= image_tag url_for(@book.image), { height: "400"} %>
       <% else %>
         <%= image_tag "default_cover.png", {height: "400"} %>
       <% end %>
-      <div class="d-flex flex-column px-4">
+      <div class="d-flex flex-column px-4 flex-fill">
         <strong>Title: </strong><%= @book.title%>
         <strong>Author: </strong><%= @book.author%>
         <strong>Description: </strong><%= @book.description%>
         <strong>Price: </strong>$<%= @book.price%>
         <strong>Seller name: </strong><%= link_to @seller.name, user_books_url(@seller.id)%>
+        <% if signed_in? && current_user.buyer? %>
+          <%=link_to "", id: "cart-action-btn", class: "btn btn-primary cart-btn", data: {target: @cart_action, addUrl: add_to_cart_path(@book), removeUrl: remove_from_cart_path(@book)} do%>
+            <span><%=@cart_action%></span> Cart
+          <%end%>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script> 
+  $(window).on("turbolinks:load", () => {
+    $('#cart-action-btn').click((e) => {
+      e.preventDefault();
+      const cartActionBtn = $('#cart-action-btn')
+      let new_target, url;
+      if (cartActionBtn.data('target') === 'Add to') {
+        url = cartActionBtn.data('addurl');
+        new_target = "Remove from";
+      } else {
+        url = cartActionBtn.data('removeurl')
+        new_target = "Add to";
+      }
+      return $.ajax({url, type: 'put', success(data) {
+        $('#cart-count').html(`My Cart: ${data}`);
+        cartActionBtn.find('span').html(new_target)
+        cartActionBtn.data('target', new_target)
+      }})
+    })
+  })
+</script>
