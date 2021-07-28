@@ -1,37 +1,36 @@
-<div class="container">
-
-<h1>Check-out</h1>
-<p><em>Congratulations! You are about to get smarter </em>😁</p>
-
-<div>
-
-<table class="table table-light">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_books.each_with_index do |book, index| %>
-      <tr>
-        <th scope="row"><%= index + 1%></th>
-        <td><%= link_to book.title, book_path(book.id) %></td>
-        <td>$ <%= book.price %></td>
-      </tr>
-    <% end %>
-        <tr> 
-        <td></td>
-        <td>Total:</td>
-        <td>$ <%= @cart_total %></td>     
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-<div class="d-flex flex-column flex-md-row justify-content-between">
+<div class="container checkout-container">
+  <h1>Check-out</h1>
+  <p><em>Congratulations! You are about to get smarter </em>😁</p>
+  <div>
+    <table class="table table-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_books.each_with_index do |book, index| %>
+          <tr>
+            <th scope="row"><%= index + 1%></th>
+            <td><%= link_to book.title, book_path(book.id) %></td>
+            <td>$ <%= book.price %></td>
+          </tr>
+        <% end %>
+            <tr> 
+            <td></td>
+            <td>Total:</td>
+            <td>$ <%= @cart_total %></td>     
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row mx-1 my-3 bg-light py-2">
+    <strong>Address:</strong>
+    <span><%= current_user.address %><%= link_to "Edit", edit_user_registration_path, class: "mx-2" %></span>
+  </div>
+  <div class="d-flex flex-column flex-md-row justify-content-between">
     <div class="">
         <%= link_to "Go back to cart", cart_path(current_user.id), class:"btn btn-info" %>
         <%= link_to "Keep browsing books", books_path, class:"btn btn-info" %>
@@ -39,6 +38,26 @@
     <%= link_to "", class: "btn btn-primary confirm", data: {targetUrl: confirm_purchase_path } do %>
         Confirm purchase
     <% end%>
+  </div>
 </div>
 
+<div id="confirmation-message" class="container bg-light p-4 mt-3 confirmation-container invisible">
+  <h1>Confirmed</h1>
+    <p><em>
+    <br>
+    Dear <%= current_user.name %>: <br> <br>
+    Thank you for choosing the Book House.  
+    Your books will arrive soon! <br> <br>
+    
+    In the meantime, if you don't know what to read next, ask 
+    <a href="https://github.com/aliciapaz/ruby_bot">Fritz the Librarian Bot</a> for a recommendation!
+    <br>
+    <a href="https://t.me/fritz_librarian_bot" target="_blank" >Go Ask Fritz</a>
+
+    <br><br>
+    Happy reading 📖  <br><br>
+    Your friend, <br> <br>
+    The Book House Keeper
+    
+     </em></p>
 </div>

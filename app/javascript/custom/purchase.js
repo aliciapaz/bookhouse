@@ -7,9 +7,10 @@ $(window).on('turbolinks:load', () => {
     $.ajax({url, type: 'put', datatype: 'json', success(data) {
       $('#user-balance').html(`My Balance: $${data.balance}`)
       $('#cart-count').html(`My Cart: ${data.cart}`)
+
+      $('.checkout-container').remove()
+
+      $('#confirmation-message').removeClass( "invisible" )
     }})
   })
-
-  $('')
-
 })
