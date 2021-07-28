@@ -3,12 +3,42 @@
 <h1>Check-out</h1>
 <p><em>Congratulations! You are about to get smarter </em>😁</p>
 
-<div>Total amount to pay: $ <span><%= @cart_total %></span></div>
+<div>
 
-<%= link_to "Go back to cart", cart_path(current_user.id), class:"btn btn-info" %>
-<%= link_to "Keep browsing books", books_path, class:"btn btn-info" %>
-<%= link_to "", class: "btn btn-primary confirm", data: {targetUrl: confirm_purchase_path } do %>
-    Confirm purchase
-<% end%>
+<table class="table table-light">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_books.each_with_index do |book, index| %>
+      <tr>
+        <th scope="row"><%= index + 1%></th>
+        <td><%= link_to book.title, book_path(book.id) %></td>
+        <td>$ <%= book.price %></td>
+      </tr>
+    <% end %>
+        <tr> 
+        <td></td>
+        <td>Total:</td>
+        <td>$ <%= @cart_total %></td>     
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="d-flex flex-column flex-md-row justify-content-between">
+    <div class="">
+        <%= link_to "Go back to cart", cart_path(current_user.id), class:"btn btn-info" %>
+        <%= link_to "Keep browsing books", books_path, class:"btn btn-info" %>
+    </div>
+    <%= link_to "", class: "btn btn-primary confirm", data: {targetUrl: confirm_purchase_path } do %>
+        Confirm purchase
+    <% end%>
+</div>
 
 </div>

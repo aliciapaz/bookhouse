@@ -5,6 +5,7 @@ class PurchasesController < ApplicationController
 
   def checkout
     @cart_total = current_user.cart_total_price
+    @cart_books = current_user.find_cart_books
     authorize :purchase, :checkout?
   end
 
