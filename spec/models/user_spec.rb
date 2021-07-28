@@ -47,8 +47,8 @@ RSpec.describe User, type: :model do
   end
 
   it "gives a balance of $0 to a seller after a successful sign-up" do
-    buyer = create(:seller)
-    expect(buyer.balance).to eq(0)
+    seller = create(:seller)
+    expect(seller.balance).to eq(0)
   end
 
   it "gives a balance of $0 to an admin user after sign-up" do
