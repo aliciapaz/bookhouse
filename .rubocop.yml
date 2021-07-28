@@ -37,6 +37,7 @@ Metrics:
 Metrics/AbcSize:
   Exclude:
     - "db/**/*"
+  Max: 24
 Metrics/BlockLength:
   Exclude:
     - "db/**/*"
@@ -87,6 +88,6 @@ Style/NumericLiterals:
     - "db/**/*"
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
-GlobalVars:
+Style/GlobalVars:
   AllowedVariables:
     - $redis

@@ -3,9 +3,8 @@
     <div class="co-6">
       <h1>My cart</h1>
 
-      <p>You've selected <span><%=current_user.cart_count%></span> books</p>
+      <p>You've selected <span class="cart-count-number"><%=current_user.cart_count%></span><span class="cart-count-noun"><%= current_user.cart_count == 1 ? " book" : " books" %></span></p>
     </div>
-
     <% @cart_books.each do |book| %>
     <div class="row my-1 cart-book">
       <div class="col-6"><%= link_to book.title, book%></div>
@@ -18,20 +17,5 @@
     </div>
     <% end %>
   </div>
+  <div><%= link_to "Proceed to Checkout", checkout_url, class: "btn btn-primary"%></div>
 </div>
-
-<script>
-  $(window).on("turbolinks:load", () => {
-    $('#my-cart .remove').click((e) => {
-    e.preventDefault();
-    let removeBtn, url;
-    removeBtn = $('#my-cart .remove').closest('a')
-    url = removeBtn.data('targeturl')
-    $.ajax({url, type: 'put', success(data) {
-      $('#cart-count').html(`My Cart: ${data}`);
-      $('span').html(data)
-      $( e.target ).closest('.cart-book').slideUp()
-    }})
-  });
-  })
-</script>

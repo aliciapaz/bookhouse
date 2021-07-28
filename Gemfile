@@ -33,6 +33,8 @@ gem "pundit", "~> 2.1"
 gem "faker"
 # Allow pagination
 gem "kaminari"
+# Adds typed jsonb backed data to Active Record models
+gem "jsonb_accessor", "~> 1.3", ">= 1.3.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

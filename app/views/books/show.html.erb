@@ -1,7 +1,6 @@
-
 <div class="container">
   <div class = "row d-flex flex-column">
-    <div class= "col d-flex">
+    <div class= "col d-flex flex-column flex-lg-row">
       <% if @book.image.attached? %>
         <%= image_tag url_for(@book.image), { height: "400"} %>
       <% else %>
@@ -13,34 +12,17 @@
         <strong>Description: </strong><%= @book.description%>
         <strong>Price: </strong>$<%= @book.price%>
         <strong>Seller name: </strong><%= link_to @seller.name, user_books_url(@seller.id)%>
-        <% if signed_in? && current_user.buyer? %>
-          <%=link_to "", id: "cart-action-btn", class: "btn btn-primary cart-btn", data: {target: @cart_action, addUrl: add_to_cart_path(@book), removeUrl: remove_from_cart_path(@book)} do%>
-            <span><%=@cart_action%></span> Cart
-          <%end%>
-        <% end %>
       </div>
     </div>
   </div>
+  <div class= "row">
+          <div class="">
+            <% if signed_in? && current_user.buyer? %>
+            <%= link_to "Back to search", :back, class: "btn btn-info cart-btn" %>
+            <%=link_to "", id: "cart-action-btn", class: "btn btn-primary cart-btn", data: {target: @cart_action, addUrl: add_to_cart_path(@book), removeUrl: remove_from_cart_path(@book)} do%>
+              <span><%=@cart_action%></span> Cart
+            <%end%>
+                    <% end %>
+          </div>
+  </div>
 </div>
-
-<script> 
-  $(window).on("turbolinks:load", () => {
-    $('#cart-action-btn').click((e) => {
-      e.preventDefault();
-      const cartActionBtn = $('#cart-action-btn')
-      let new_target, url;
-      if (cartActionBtn.data('target') === 'Add to') {
-        url = cartActionBtn.data('addurl');
-        new_target = "Remove from";
-      } else {
-        url = cartActionBtn.data('removeurl')
-        new_target = "Add to";
-      }
-      return $.ajax({url, type: 'put', success(data) {
-        $('#cart-count').html(`My Cart: ${data}`);
-        cartActionBtn.find('span').html(new_target)
-        cartActionBtn.data('target', new_target)
-      }})
-    })
-  })
-</script>

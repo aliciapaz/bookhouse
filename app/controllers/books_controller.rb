@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
   def index
     if params[:search_by_title].present?
-      @book_search = Book.search_by_title(params[:search_by_title])
+      @book_search = Book.available.search_by_title(params[:search_by_title])
       @books = @book_search.order(created_at: :desc).page(params[:page]).per(6)
     else
-      @books = Book.order(created_at: :desc).page(params[:page]).per(6)
+      @books = Book.available.order(created_at: :desc).page(params[:page]).per(6)
     end
   end
 
@@ -58,7 +58,7 @@ class BooksController < ApplicationController
   # Show books of a given seller
   def seller
     @seller = User.find(params[:id])
-    @books = Book.where(seller_id: params[:id])
+    @books = Book.available.where(seller_id: params[:id]).order(created_at: :desc).page(params[:page]).per(6)
     render "user_books"
   end
 
