@@ -44,9 +44,9 @@ class User < ApplicationRecord
     end
 
     def update_initial_balance
-      user_info["balance"] = 50 if buyer?
-      user_info["balance"] = 0 if seller?
-      user_info["balance"] = 0 if admin?
+      self.balance = 50 if buyer?
+      self.balance = 0 if seller?
+      self.balance = 0 if admin?
       save!
     end
 
