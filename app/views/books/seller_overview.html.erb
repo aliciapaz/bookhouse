@@ -1,0 +1,38 @@
+<h1 class="text-center">Sales overview</h1>
+
+<div class="container">
+  <p>Hi <%= current_user.name %>! <br>
+  Here is an overview of your sales: </p>
+
+  <div class="row">
+      <table class="table table-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Buyer</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sales.each_with_index do |sale, index| %>
+          <tr>
+            <th scope="row"><%= index + 1%></th>
+            <td><%= link_to sale.book.title, book_path(sale.book.id) %></td>
+            <td><%= sale.buyer.name %></td>
+            <td>$ <%= sale.book.price %></td>
+          </tr>
+        <% end %>
+          <tr>
+            <td></td>
+            <td colspan="2" style="color: red">Book House fee </td>
+            <td style="color: red">- $ <%= @sales.count * 1 %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="2"><strong>Total earnings</strong></td>
+            <td><strong>$ <%= current_user.balance %></strong></td>     
+          </tr>
+      </tbody>
+    </table>
+</div>
