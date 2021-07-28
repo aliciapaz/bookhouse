@@ -10,6 +10,8 @@ import 'channels'
 import 'bootstrap'
 import 'jquery'
 import 'custom/cart'
+import 'custom/purchase'
+import 'custom/registration'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
