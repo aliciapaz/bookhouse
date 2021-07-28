@@ -5,7 +5,6 @@
 
       <p>You've selected <span class="cart-count-number"><%=current_user.cart_count%></span><span class="cart-count-noun"><%= current_user.cart_count == 1 ? " book" : " books" %></span></p>
     </div>
-
     <% @cart_books.each do |book| %>
     <div class="row my-1 cart-book">
       <div class="col-6"><%= link_to book.title, book%></div>
