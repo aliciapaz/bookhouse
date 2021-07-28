@@ -59,7 +59,14 @@ class BooksController < ApplicationController
   def seller
     @seller = User.find(params[:id])
     @books = Book.available.where(seller_id: params[:id]).order(created_at: :desc).page(params[:page]).per(6)
-    render "user_books"
+    render "books_by_seller"
+  end
+
+  # Show a seller their sold books
+  def overview
+    book_ids = Book.sold.where(seller_id: current_user.id).ids
+    @sales = Purchase.includes(:book, :buyer).where(book_id: book_ids)
+    render "seller_overview"
   end
 
   private

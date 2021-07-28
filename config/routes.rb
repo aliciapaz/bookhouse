@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :books
   # Get books of a given seller
   get "users/:id/books", to: "books#seller", as: "user_books"
+  # Get overview  of sold books
+  get "overview", to: "books#overview", as: "seller_overview"
 end
